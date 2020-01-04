@@ -47,3 +47,4 @@ The dates on this document adheres to the standard [ISO 8601](https://www.iso.or
 - None
 ### Security
 - Stop signal connected to hardware interruption.
+
