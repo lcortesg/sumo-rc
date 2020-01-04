@@ -1,5 +1,5 @@
 /**
- * @brief: RC Sumo robot test code.
+ * @brief: Radio-Controlled Sumo robot test code.
  * @author: Lucas Cortés Gutiérrez.
  * @date: 2019/11/10
  */

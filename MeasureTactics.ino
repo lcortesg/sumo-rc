@@ -48,6 +48,6 @@ void calc_input(uint8_t channel, uint8_t input_pin) {
 
 
 void calc_ch1() { calc_input(DIRECTION, DIRECTION_INPUT); }
-void calc_ch2() { calc_input(THROTLE, THROTLE_INPUT); }
+void calc_ch2() { calc_input(THROTTLE, THROTTLE_INPUT); }
 void calc_ch3() { calc_input(SWITCH, SWITCH_INPUT); }
 void calc_ch4() { calc_input(BUTTON, BUTTON_INPUT); }
