@@ -8,13 +8,13 @@
 #include <Sabertooth.h>
 
 #define NONE 0
-#define ENABLE 0    // Change this to 1 when testing for real.
-#define DEBUG !ENABLE // When enabled, this will print via serial prompt all the measurements and messages written into this file, as well as the "Tactic's" files.
+#define ENABLE 1        // Change this to 1 when testing for real.
+#define DEBUG !ENABLE   // When enabled, this will print via serial prompt all the measurements and messages written into this file, as well as the "Tactic's" files.
 
-#define DRIFT 50    // Stick drift dead-zone.
+#define DRIFT 50        // Stick drift dead-zone.
 #define THRESHOLD 50    // Switch threshold.
-#define TURN_TIME 300    // Time (in mili-seconds) needed for a 180 degree turn.
-#define DIVIDER 1    // POWER_MAX divider.
+#define TURN_TIME 300   // Time (in mili-seconds) needed for a 180 degree turn.
+#define DIVIDER 1       // POWER_MAX divider.
 #define POWER_MAX 255   // Maximum power supplied through the motor driver.
 double POWER = 0;
 
@@ -70,10 +70,10 @@ int tactic = 0;
 #define SWITCH 2
 #define BUTTON 3
 
-#define DIRECTION_INPUT A0 // Right stick, X axis
-#define THROTTLE_INPUT A1 // Left stick, Y axis
-#define SWITCH_INPUT A2 // SWA & SWD
-#define BUTTON_INPUT A3 // KEY2
+#define DIRECTION_INPUT A0  // Right stick, X axis
+#define THROTTLE_INPUT A1   // Left stick, Y axis
+#define SWITCH_INPUT A2     // SWA & SWD
+#define BUTTON_INPUT A3     // KEY2
 
 uint16_t rc_values[RC_NUM_CHANNELS];
 uint32_t rc_start[RC_NUM_CHANNELS];
@@ -124,11 +124,12 @@ void setup(){
 
 void loop(){
     rc_read_values();
-
-    //Serial.print("DIRECTION:"); Serial.print(rc_values[DIRECTION]); Serial.print("\t");
-    //Serial.print("THROTTLE:"); Serial.print(rc_values[THROTTLE]); Serial.print("\t");
-    //Serial.print("SWITCHES:"); Serial.print(rc_values[SWITCH]); Serial.print("\t");
-    //Serial.print("BUTTON:"); Serial.println(rc_values[BUTTON]);
+    #if DEBUG > NONE
+        Serial.print("DIRECTION:"); Serial.print(rc_values[DIRECTION]); Serial.print("\t");
+        Serial.print("THROTTLE:"); Serial.print(rc_values[THROTTLE]); Serial.print("\t");
+        Serial.print("SWITCHES:"); Serial.print(rc_values[SWITCH]); Serial.print("\t");
+        Serial.print("BUTTON:"); Serial.println(rc_values[BUTTON]);
+    #endif
     
     if ((rc_values[SWITCH] > 1500 - THRESHOLD) && (rc_values[SWITCH] < 1500 + THRESHOLD)) {
 
