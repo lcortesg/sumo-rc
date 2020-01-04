@@ -8,7 +8,7 @@
 #include <Sabertooth.h>
 
 #define NONE 0
-#define ENABLE 1        // Change this to 1 when testing for real.
+#define ENABLE 0        // Change this to 1 when testing for real.
 #define DEBUG !ENABLE   // When enabled, this will print via serial prompt all the measurements and messages written into this file, as well as the "Tactic's" files.
 
 #define DRIFT 50        // Stick drift dead-zone.
