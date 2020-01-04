@@ -9,7 +9,7 @@
 
 #define NONE 0
 #define ENABLE 0    // Change this to 1 when testing for real.
-#define DEBUG !ENABLE
+#define DEBUG !ENABLE // When enabled, this will print via serial prompt all the measurements and messages writen into this file, as well as the "Tactic's" files.
 
 #define DRIFT 50    // Stick drift deadzone.
 #define THRESHOLD 50    // Switch threshold.
@@ -106,7 +106,8 @@ void setup(){
     //delay(5050);
 
     pacman(); // This is optional, obviously.
-    //elephant_short(); // This is optional, obviously.
+    //elephant(); // This is optional, obviously. alternative song.
+    //elephant_short(); // This is optional, obviously. alternative song.
     
     #if DEBUG > NONE
         Serial.println("WAITING FOR SWITCH 'SWA' IN DOWN POSITION...");

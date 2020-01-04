@@ -1,7 +1,7 @@
 /**
- * @function measureLine : Lee los sensores de línea y determina si se está detecctando un fondo blanco
+ * @function measureEnemy : This function reads the diffuse reflex sensors and determines an enemy is detected.
  * @param : none
- * @return : retorna 0 si no se detecta una línea, 1 en caso contrario
+ * @return : Returns 0 if an enemy is detected, 1 otherwise.
  */
 
 

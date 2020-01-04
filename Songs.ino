@@ -89,7 +89,7 @@
 #define NOTE_DS8 4978
 #define REST      0
 
-// change this to whichever pin you want to use
+// Change this to whichever pin you want to use
 int buzzer = A5;
 
 
