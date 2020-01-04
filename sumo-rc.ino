@@ -9,11 +9,11 @@
 
 #define NONE 0
 #define ENABLE 0    // Change this to 1 when testing for real.
-#define DEBUG !ENABLE // When enabled, this will print via serial prompt all the measurements and messages writen into this file, as well as the "Tactic's" files.
+#define DEBUG !ENABLE // When enabled, this will print via serial prompt all the measurements and messages written into this file, as well as the "Tactic's" files.
 
-#define DRIFT 50    // Stick drift deadzone.
+#define DRIFT 50    // Stick drift dead-zone.
 #define THRESHOLD 50    // Switch threshold.
-#define TURN_TIME 300    // Time (in miliseconds) needed for a 180 degree turn.
+#define TURN_TIME 300    // Time (in mili-seconds) needed for a 180 degree turn.
 #define DIVIDER 1    // POWER_MAX divider.
 #define POWER_MAX 255   // Maximum power supplied through the motor driver.
 double POWER = 0;
@@ -66,12 +66,12 @@ int tactic = 0;
 #define RC_NUM_CHANNELS 4
 
 #define DIRECTION 0
-#define THROTLE 1
+#define THROTTLE 1
 #define SWITCH 2
 #define BUTTON 3
 
 #define DIRECTION_INPUT A0 // Right stick, X axis
-#define THROTLE_INPUT A1 // Left stick, Y axis
+#define THROTTLE_INPUT A1 // Left stick, Y axis
 #define SWITCH_INPUT A2 // SWA & SWD
 #define BUTTON_INPUT A3 // KEY2
 
@@ -83,12 +83,12 @@ Sabertooth ST(128);
 
 void setup(){
     pinMode(DIRECTION_INPUT, INPUT);
-    pinMode(THROTLE_INPUT, INPUT);
+    pinMode(THROTTLE_INPUT, INPUT);
     pinMode(SWITCH_INPUT, INPUT);
     pinMode(BUTTON_INPUT, INPUT);
 
     enableInterrupt(DIRECTION_INPUT, calc_ch1, CHANGE);
-    enableInterrupt(THROTLE_INPUT, calc_ch2, CHANGE);
+    enableInterrupt(THROTTLE_INPUT, calc_ch2, CHANGE);
     enableInterrupt(SWITCH_INPUT, calc_ch3, CHANGE);
     enableInterrupt(BUTTON_INPUT, calc_ch4, CHANGE);
     
@@ -126,13 +126,13 @@ void loop(){
     rc_read_values();
 
     //Serial.print("DIRECTION:"); Serial.print(rc_values[DIRECTION]); Serial.print("\t");
-    //Serial.print("THROTLE:"); Serial.print(rc_values[THROTLE]); Serial.print("\t");
+    //Serial.print("THROTTLE:"); Serial.print(rc_values[THROTTLE]); Serial.print("\t");
     //Serial.print("SWITCHES:"); Serial.print(rc_values[SWITCH]); Serial.print("\t");
     //Serial.print("BUTTON:"); Serial.println(rc_values[BUTTON]);
     
     if ((rc_values[SWITCH] > 1500 - THRESHOLD) && (rc_values[SWITCH] < 1500 + THRESHOLD)) {
 
-        POWER = ((rc_values[THROTLE] < 1500 - DRIFT) || (rc_values[THROTLE] > 1500 + DRIFT)) ? (rc_values[THROTLE] - 1500.0)/(2*DIVIDER) : 0;
+        POWER = ((rc_values[THROTTLE] < 1500 - DRIFT) || (rc_values[THROTTLE] > 1500 + DRIFT)) ? (rc_values[THROTTLE] - 1500.0)/(2*DIVIDER) : 0;
 
 
         if ((rc_values[BUTTON] > 2000 - THRESHOLD) && (rc_values[BUTTON] < 2000 + THRESHOLD)) {
@@ -192,7 +192,7 @@ void loop(){
 
             if(searchPID()){
 
-                POWER = (rc_values[THROTLE] > 1500 + DRIFT) ? (rc_values[THROTLE] - 1500.0)/(2*DIVIDER) : 0; // Be aware that the power definition is different from the one in line 134, this is due to our need of using only positive values, nonetheless, this can be changed if the need arise.
+                POWER = (rc_values[THROTTLE] > 1500 + DRIFT) ? (rc_values[THROTTLE] - 1500.0)/(2*DIVIDER) : 0; // Be aware that the power definition is different from the one in line 134, this is due to our need of using only positive values, nonetheless, this can be changed if the need arise.
                 
                 #if ENABLE > NONE
                     ST.motor(1, POWER);
