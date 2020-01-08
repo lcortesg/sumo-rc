@@ -3,7 +3,7 @@
  * @author: Lucas Cortés Gutiérrez.
  * @date: 2019/11/10
  */
- 
+
 #include <EnableInterrupt.h>
 #include <Sabertooth.h>
 
