@@ -32,7 +32,8 @@ double POWER = 0;
 #define MISS_COUNT_MAX 1000
 
 /**
- * @brief : PID parameters definition
+ * @brief : PID controller constants.
+ * We used the Ziegler–Nichols method to tune this parameters.
  */
 
 #define KP 0.032

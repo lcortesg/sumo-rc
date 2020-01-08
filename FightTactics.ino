@@ -81,6 +81,12 @@ void fight1(){
     return;
 }
 
+void fight2(){
+    ST.motor(1, POWER_MAX/1);
+    ST.motor(2, POWER_MAX/1);
+    return;
+}
+
 void searchFWD(){
     ST.motor(1, POWER_MAX*0.75);
     ST.motor(2, POWER_MAX*0.75);
