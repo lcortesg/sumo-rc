@@ -110,7 +110,7 @@ void setup(){
     //elephant(); // This is optional, obviously. alternative song.
     //elephant_short(); // This is optional, obviously. alternative song.
 
-    #if DEBUG > 0
+    #if DEBUG > NONE
         Serial.println("WAITING FOR SWITCH 'SWA' IN DOWN POSITION...");
     #endif
 
