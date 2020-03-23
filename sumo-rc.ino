@@ -2,6 +2,7 @@
  * @brief: Radio-Controlled Sumo robot test code.
  * @author: Lucas Cortés Gutiérrez.
  * @date: 2019/11/10
+ exp
  */
 
 #include <EnableInterrupt.h>
@@ -92,7 +93,7 @@ void setup(){
     enableInterrupt(THROTTLE_INPUT, calc_ch2, CHANGE);
     enableInterrupt(SWITCH_INPUT, calc_ch3, CHANGE);
     enableInterrupt(BUTTON_INPUT, calc_ch4, CHANGE);
-    
+
     pinMode(LED_BUILTIN, OUTPUT);
     SabertoothTXPinSerial.begin(9600);
     ST.autobaud();
@@ -100,7 +101,7 @@ void setup(){
     //pinMode(PIN_START_BUTTON, INPUT_PULLUP);
     //attachInterrupt(digitalPinToInterrupt(PIN_START_BUTTON), stop, FALLING);
     //while(!digitalRead(PIN_START_BUTTON));
-    
+
     //Serial.println("Wait for 5 seconds ... ");
 
 
@@ -109,18 +110,18 @@ void setup(){
     pacman(); // This is optional, obviously.
     //elephant(); // This is optional, obviously. alternative song.
     //elephant_short(); // This is optional, obviously. alternative song.
-    
+
     #if DEBUG > NONE
         Serial.println("WAITING FOR SWITCH 'SWA' IN DOWN POSITION...");
     #endif
-    
+
     while ((rc_values[SWITCH] < 1500 - THRESHOLD) || (rc_values[SWITCH] > 1500 + THRESHOLD)) rc_read_values();
     digitalWrite(LED_BUILTIN, HIGH);
 
     #if DEBUG > NONE
         Serial.println("START!");
     #endif
-        
+
 }
 
 void loop(){
@@ -131,7 +132,7 @@ void loop(){
         Serial.print("SWITCHES:"); Serial.print(rc_values[SWITCH]); Serial.print("\t");
         Serial.print("BUTTON:"); Serial.println(rc_values[BUTTON]);
     #endif
-    
+
     if ((rc_values[SWITCH] > 1500 - THRESHOLD) && (rc_values[SWITCH] < 1500 + THRESHOLD)) {
 
         POWER = ((rc_values[THROTTLE] < 1500 - DRIFT) || (rc_values[THROTTLE] > 1500 + DRIFT)) ? (rc_values[THROTTLE] - 1500.0)/(2*DIVIDER) : 0;
@@ -148,29 +149,29 @@ void loop(){
                 Serial.println("SICK 180 DEGREE TURN! :D");
             #endif
         }
-        
+
         if ((rc_values[DIRECTION] > 1500 - DRIFT) && (rc_values[DIRECTION] < 1500 + DRIFT)) {
             #if ENABLE > NONE
                 ST.motor(1, POWER);
                 ST.motor(2, POWER);
             #endif
-            
+
             #if DEBUG > NONE
                 if (POWER == 0) {Serial.println("IDLE");}
                 else if (POWER > 0) {Serial.print("FORWARD : "); Serial.println(POWER);}
                 else if (POWER < 0) {Serial.print("BACKWARD : "); Serial.println(POWER);}
             #endif
         }
-       
+
         else if (rc_values[DIRECTION] > 1500 + DRIFT) {
             #if ENABLE > NONE
                 ST.motor(1, POWER);
                 ST.motor(2, -POWER);
             #endif
-            
+
             #if DEBUG > NONE
                 Serial.print("RIGHT : "); Serial.println(POWER);
-            #endif    
+            #endif
         }
 
         else if (rc_values[DIRECTION] < 1500 - DRIFT) {
@@ -195,12 +196,12 @@ void loop(){
             if(searchPID()){
 
                 POWER = (rc_values[THROTTLE] > 1500 + DRIFT) ? (rc_values[THROTTLE] - 1500.0)/(2*DIVIDER) : 0; // Be aware that the power definition is different from the one in line 134, this is due to our need of using only positive values, nonetheless, this can be changed if the need arise.
-                
+
                 #if ENABLE > NONE
                     ST.motor(1, POWER);
                     ST.motor(2, POWER);
                 #endif
-            
+
                 #if DEBUG > NONE
                     if (POWER == 0) {Serial.println("IDLE");}
                     else if (POWER > 0) {Serial.print("FIGHTING : "); Serial.println(POWER);}
@@ -208,17 +209,17 @@ void loop(){
                 //fight();
             }
         }
-    }   
+    }
 
     else {
-        digitalWrite(LED_BUILTIN, LOW); 
+        digitalWrite(LED_BUILTIN, LOW);
         ST.motor(1, 0);
         ST.motor(2, 0);
-       
+
         #if DEBUG > NONE
             Serial.println("STOP!");
         #endif
-        
+
         while(true);
-    }  
+    }
 }
