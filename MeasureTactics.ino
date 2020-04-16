@@ -1,7 +1,15 @@
-/**
- * @function measureEnemy : This function reads the diffuse reflex sensors and determines an enemy is detected.
- * @param : none
- * @return : Returns 0 if an enemy is detected, 1 otherwise.
+/*
+ * @function measureEnemy : This function reads the diffuse reflex sensors and determines if an enemy is detected.
+ * @param : none.
+ * @return : Returns 1 if an enemy is detected, 0 otherwise.
+ *
+ * @function rc_read_values : This function reads the given RC channels.
+ * @param : none.
+ * @return : none.
+ *
+ * @function calc_input : This function calculates the the input of a pin given an RC channel.
+ * @param : RC channel and RC input pin
+ * @return : none.
  */
 
 
@@ -46,8 +54,7 @@ void calc_input(uint8_t channel, uint8_t input_pin) {
     }
 }
 
-
-void calc_ch1() { calc_input(DIRECTION, DIRECTION_INPUT); }
+void calc_ch1() { calc_input(STEERING, STEERING_INPUT); }
 void calc_ch2() { calc_input(THROTTLE, THROTTLE_INPUT); }
 void calc_ch3() { calc_input(SWITCH, SWITCH_INPUT); }
 void calc_ch4() { calc_input(BUTTON, BUTTON_INPUT); }
