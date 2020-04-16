@@ -1,5 +1,5 @@
 /*
- * @brief: Radio-Controlled Mega Sumo Robot code.
+ * @brief: Radio-Controlled Mega Sumo Robot Code.
  * @author: Lucas Cortés Gutiérrez.
  * @date: 2020/04/16
  */
