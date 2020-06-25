@@ -1,6 +1,7 @@
-/**
- * @function
+/* 
+ * @function searchPID : PID control loop implementation.
  */
+
 bool searchPID(){
     measure = ((enemy_sensor_left + enemy_sensor_f_left + enemy_sensor_front + enemy_sensor_f_right + enemy_sensor_right) == 0)?(measure):(enemy_sensor_left*1000 + enemy_sensor_f_left*2000 + enemy_sensor_front*3000 + enemy_sensor_f_right*4000 + enemy_sensor_right*5000)/(enemy_sensor_left + enemy_sensor_f_left + enemy_sensor_front + enemy_sensor_f_right + enemy_sensor_right);
     error = ref - measure;
@@ -63,8 +64,12 @@ void fight1(){
     if(actuation < POWER_MAX){
         while(millis() < next){
             actuation = (actuation >= POWER_MAX)?(POWER_MAX):(actuation+10);
-            ST.motor(1, actuation);
-            ST.motor(2, actuation);
+
+            #if ENABLE > NONE
+                ST.motor(1, actuation);
+                ST.motor(2, actuation);
+            #endif
+
             delay(20);
             /*
             if(measureLine()){
@@ -75,20 +80,32 @@ void fight1(){
         }
     }
     else{
-        ST.motor(1, POWER_MAX);
-        ST.motor(2, POWER_MAX);
+
+        #if ENABLE > NONE
+            ST.motor(1, POWER_MAX);
+            ST.motor(2, POWER_MAX);
+        #endif
+
     }
     return;
 }
 
 void fight2(){
-    ST.motor(1, POWER_MAX/1);
-    ST.motor(2, POWER_MAX/1);
+
+    #if ENABLE > NONE
+        ST.motor(1, POWER_MAX/1);
+        ST.motor(2, POWER_MAX/1);
+    #endif
+
     return;
 }
 
 void searchFWD(){
-    ST.motor(1, POWER_MAX*0.75);
-    ST.motor(2, POWER_MAX*0.75);
+    
+    #if ENABLE > NONE
+        ST.motor(1, POWER_MAX*0.75);
+        ST.motor(2, POWER_MAX*0.75);
+    #endif
+
     delay(20);
 }
